@@ -1,5 +1,6 @@
 package com.example.proj1.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,8 +23,8 @@ public class UserController {
     private userService userService;
 
     @GetMapping("/getUser")
-    public String getUser(){
-        return "Rashmi";
+    public List<userDTO> getUser(){
+        return userService.getAllUsers();
     }
 
     @PostMapping("/saveUser")  // frontend data recieve as json objects
@@ -32,12 +33,12 @@ public class UserController {
     }
 
     @PutMapping("/updateUser")
-    public String updateUser(){
-        return "user updated";
+    public userDTO updateUser(@RequestBody userDTO userDTO){
+        return userService.updateUserDTO(userDTO);
     }
 
     @DeleteMapping("/deleteUser")
-    public String deleteUser(){
-        return "user deleted";
+    public boolean deleteUser(@RequestBody userDTO userDTO){
+        return userService.deleteUser(userDTO);
     }
 }
